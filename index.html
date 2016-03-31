@@ -1,0 +1,311 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Wish by Tammy Le</title>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <script src="jquery.min.js"></script>
+        <script src="bootstrap.min.js"></script>
+        <script type="text/javascript" src="three.min.js"></script>
+        <script type="text/javascript" src="TrackballControls.js"></script> 
+        <script type="text/javascript" src="FresnelShader.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+<style>
+    body {
+        color: #666;
+        overflow: hidden;
+        font-size:18px;
+        font-family: 'Roboto Slab', serif;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        font-family: 'Roboto Slab', serif;
+
+    }
+        
+    .addwish{
+        position:relative;
+        text-align:right;
+        padding:10px;
+    }
+        
+    .makeWish { 
+        position: fixed;
+        font-family: 'Roboto Slab', serif;
+        font-size:16px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 99999;
+        opacity:0;
+        pointer-events: none;
+    }
+        
+    .makeWish:target {
+        opacity:1;
+        pointer-events: auto;
+    }
+
+    .makeWish > div {
+        width: 600px;
+        position: relative;
+        margin: 10% auto;
+        padding: 5px 20px 13px 20px;
+        border-radius: 10px;
+        background: #fff;
+    }
+        
+    #submitWish{
+        z-index:100;
+    }
+        
+    .close {
+        color: #000000;
+        line-height: 25px;
+        position: absolute;
+        right: 3px;
+        text-align: center;
+        top: 3px;
+        width: 24px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .close:hover { 
+        opacity: 0.6;
+    }
+    
+    .addbtn{
+        letter-spacing: 1px;
+        background: transparent;
+        color: #fff;
+        border-radius: 5px;
+        opacity: 0.6;
+        border: 2px solid #fff;
+        padding: 9px 20px 10px 20px;
+        font-size: 20px;
+        margin-top: 7px;
+        margin-right: 7px;
+        font-family: 'Roboto Slab', serif;
+    }
+    
+    .addbtn:hover{
+        background: #fff;
+        color: #267bc1;
+        transition: 1s ease;
+    }
+    
+    
+    .add{
+    text-align: right;
+    }
+    
+    .addwish a{
+        color:#fff;
+    } 
+        
+    .addwish a:hover{
+        text-decoration: none;
+        color:#ff0000;
+    }
+    
+    .intro{
+        width:600px;
+        text-align:center;
+        margin: 0 auto;
+    }
+        
+    .intro p{
+        line-height: 28px;
+        font-size:16px;
+    }
+        
+    #container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+        font-size: 21px;
+        text-align: center;
+        animation: fadein 15s;
+        -moz-animation: fadein 15s; /* Firefox */
+        -webkit-animation: fadein 15s; /* Safari and Chrome */
+        -o-animation: fadein 15s; /* Opera */
+    }
+        
+    @keyframes fadein {
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+    }
+    @-moz-keyframes fadein { /* Firefox */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+    }
+    @-webkit-keyframes fadein { /* Safari and Chrome */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+    }
+    @-o-keyframes fadein { /* Opera */ 
+        from {
+            opacity:0;
+        }
+        to {
+            opacity: 1;
+        }
+    }        
+        
+    #mo{
+        z-index: 10;
+        position:relative;
+    }
+
+    #myModal{
+        z-index: 50;
+        position:relative;
+    }
+
+    .modal-backdrop {
+        z-index: 9 !important;
+        background-color: #014984;
+    }
+    .modal-backdrop, .modal-backdrop.fade.in {
+        opacity: 0.3;
+    }
+    
+    .modal.fade.in{
+        opacity:0.7;
+    }
+    
+    .modal-body{
+        padding: 30px;
+        text-align:center;
+    }
+    
+    .modal{
+        line-height: 28px;
+    }
+    
+    .times{
+        font-size:30px;
+    }
+    
+    input[type=text]{
+        padding-top:13px;
+        border-top:0;
+        border-left:0;
+        border-right:0;
+        border-bottom: 1px dashed #000;
+        font-family: 'Roboto Slab', serif;
+        font-size:18px;
+        border-radius: 0;
+        outline: none;
+        box-shadow: none;
+        color: #267bc1;
+        opacity: 0.8;
+    }
+    
+    input[type=text]:focus, textarea:focus {
+      box-shadow: none;
+    }
+    
+    .sendwish{
+        padding-top:30px;
+    }
+    
+    .submitwishbtn{
+        color: #267bc1;
+        background: transparent;
+        font-size:14px;
+        padding: 10px 15px 10px 15px;
+        font-family: 'Roboto Slab', serif;
+        text-transform: lowercase;
+        letter-spacing: 1px;
+        border: 1px solid #267bc1;
+        opacity: 0.5;
+    }
+    
+    .submitwishbtn:hover{
+        color: #fff;
+        background: #267bc1;
+        border:none;
+        transition: 1s ease;
+        border: 1px solid #267bc1;
+        opacity: 1;
+    }
+    
+    .modal{
+        margin-top:10%;
+    }
+    
+    span.show-wish {
+        color: #267bc1;
+    }
+    
+</style>       
+        
+    </head>
+    
+<body>
+    
+    <div class="add">
+    <button class="btn btn-primary btn-lg addbtn" data-toggle="modal" data-target="#addWish" id="mo">
+      <i class="fa fa-plus-circle"></i> add wish
+    </button>   
+    </div>
+      
+    <!-- modal -->    
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+      <div class="modal-body">
+          <button type="button" class="close times" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        I wish <span class="show-wish"></span>
+      </div>
+    </div>
+  </div>
+</div>    
+        
+<div class="modal fade" id="addWish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <span>I wish </span><input type="text" class="add-wish"/>
+          <div class="sendwish">
+         <button type="button" class="btn btn-primary add-wish-button submitwishbtn" data-dismiss="modal"><i class="fa fa-paper-plane"></i> Make a wish </button>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>           
+        
+<!-- Welcome message -->
+<div class="intro">
+    <h2>Wish</h2>
+    <h3>An interactive site to hold your wishes</h3>
+<p>/wiSH/ a desire or hope for something to happen</p>
+</div>     
+
+<!-- threejs loading from container -->    
+<div id="container"></div>
+        
+	</body>
+</html>
